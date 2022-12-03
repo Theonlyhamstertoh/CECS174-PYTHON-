@@ -76,26 +76,49 @@ def get_words_with_no_e(string: str):
       no_e_list.append(word)
     
   percentage = len(no_e_list) / len(word_lists) * 100
-  return f"\n------ {percentage:.1f}% ------\n" + " ".join(no_e_list) 
+  return f"\n\t({percentage:.1f}% of words without e) " + " ".join(no_e_list) 
   #compute percentage of words with no e
   # print words with no e
   pass
 
 
-def avoids(word, forbidden_letters):
+def avoids(string: str, forbidden_letters: str):
   # return True if words doesn't use any forbidden letters
   # prompt user to enter a string of forbidden letters
-  pass
 
-def uses_only(word, letters):
+  # forbidden_letters = input("Enter Forbidden Letters: ")
+  for letter in forbidden_letters:
+    if letter in string:
+      return False
+  
+  return True
+
+def uses_only(string, only_letters):
   # return True if word contains only letters in list
-  pass
+  for letter in string:
+    if letter not in only_letters:
+      return False
+  return True
+  
+def uses_all(string, required_letters):
+  for letter in required_letters:
+    if letter not in string:
+      return False
+  return True
 
-def uses_all(word, string):
   # uses all required letters at least once
-  pass
 def is_abcedarian(string: str):
   # words appear in alphabetical order
   return is_sorted(string)
 
 
+
+print("is_abcedarian('Weibo') ==", is_abcedarian('weibo'))
+print("uses_all('weibo', 'abc') ==", uses_all('weibo', 'abc'))
+print("uses_all('weibo', 'bow') ==", uses_all('weibo', 'bow'))
+print("uses_only('weibo', 'jeff') ==", uses_only('weibo', 'jeff'))
+print("avoids('weibo', 'z') ==", avoids('weibo', "z"))
+print("get_words_with_no_e('weibo zhang'):", get_words_with_no_e('weibo zhang'))
+print("check_no_char('weibo zhang', 'u') ==", check_no_char('weibo zhang', 'u'))
+print("check_no_e ==", check_no_e('weibo zhang'))
+print("remove_letter_from_string('weibo zhang', 'e') ==", remove_letter_from_string('weibo zhang', 'e'))
